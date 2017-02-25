@@ -1,0 +1,36 @@
+#Consider all possible curves of the form y2 = x3 + ax + b over the ﬁeld GF(103) 
+
+import math
+# To check if the order is prime or not
+def is_prime(x):
+    if x > 1:
+        n = x // 2
+        for i in range(2, n + 1):
+            if x % i == 0:
+                return False
+        return True
+    else:
+        return False
+
+p=103
+my_list = list()
+# looping a and b from 1 to 102
+for a in range (1,p-1):
+    for b in range (1,p-1):
+        #counter to keep track of order
+        count=0
+        for x in range(0,p-1):
+            val = (x**3 + a*x + b)%p
+            result_x = (val**((p-1)/2))%p
+            # Checking is QR or QNR
+            if (result_x != 102):
+                count=count+2
+                result_y = (val**((p+1)/4))%p
+                point= (result_y*-1)%p
+        # order is        
+        order = count+1
+        
+        # checking if prime and largest
+        if (is_prime(order)):
+            if (order==113):
+                print "a and b is : " , a , " " , b , " and the order is : " , order
